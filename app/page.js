@@ -74,7 +74,7 @@ export default function Home() {
                 Personalized Hass Avocado Farming Guidance
                 </Typography>
                 <Typography variant='body1'>
-                Our AI assistant provides step-by-step guidance based on your farm's unique conditions.
+                Our AI assistant provides step-by-step guidance based on your farms unique conditions.
                 </Typography>
               </CardContent>
             </FeatureCard>
