@@ -1,125 +1,148 @@
- 'use client' 
-import {useState} from "react";
-import {Box , Stack, TextField, Button} from '@mui/material'
 
+"use client"
+
+import { Container, Typography, Button, Box, Grid, Card, CardContent, Avatar } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import Link from 'next/link'
+
+const HeroSection = styled(Box)(({ theme }) => ({
+  backgroundColor: '#808080',
+  color: '#fff',
+  padding: theme.spacing(10, 0),
+  borderRadius: "5px",
+  textAlign: 'center',
+}));
+
+const FeatureCard = styled(Card)(({ theme }) => ({
+  height: '100%',
+  textAlign: 'center',
+}));
+
+const TestimonialsSection = styled(Box)(({ theme }) => ({
+  padding: theme.spacing(10, 0),
+  backgroundColor: theme.palette.grey[100],
+}));
 
 export default function Home() {
-  const [messages, setMessages] = useState([
-    {
-      role: "assistant",
-      content: "I am find-mazao-market assisant, how may I help you"
-    }
-  ])
-  
-  const [message, setMessage] = useState('')
-  
-  const sendMessage = async () => {
-    if (!message.trim()) return;  // Don't send empty messages
-  
-    setMessage('')
-    setMessages((messages) => [
-      ...messages,
-      { role: 'user', content: message },
-      { role: 'assistant', content: '' },
-    ])
-  
-    try {
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify([...messages, { role: 'user', content: message }]),
-      })
-  
-      if (!response.ok) {
-        throw new Error('Network response was not ok')
-      }
-  
-      const reader = response.body.getReader()
-      const decoder = new TextDecoder()
-  
-      while (true) {
-        const { done, value } = await reader.read()
-        if (done) break
-        const text = decoder.decode(value, { stream: true })
-        setMessages((messages) => {
-          let lastMessage = messages[messages.length - 1]
-          let otherMessages = messages.slice(0, messages.length - 1)
-          return [
-            ...otherMessages,
-            { ...lastMessage, content: lastMessage.content + text },
-          ]
-        })
-      }
-    } catch (error) {
-      console.error('Error:', error)
-      setMessages((messages) => [
-        ...messages,
-        { role: 'assistant', content: "I'm sorry, but I encountered an error. Please try again later." },
-      ])
-    }
-  }
-
   return (
-    <Box
-      width="100vw"
-      height="100vh"
-      display="flex"
-      flexDirection="column"
-      justifyContent="center"
-      alignItems="center"
-    >
-      <Stack
-        direction={'column'}
-        width="500px"
-        height="700px"
-        border="1px solid black"
-        p={2}
-        spacing={3}
-        >
-        <Stack
-          direction={'column'}
-          spacing={2}
-          flexGrow={1}
-          overflow="auto"
-          maxHeight="100%"
-        >
-          {messages.map((message, index) => (
-            <Box
-              key={index}
-              display="flex"
-              justifyContent={
-                message.role === 'assistant' ? 'flex-start' : 'flex-end'
-              }
-            >
-              <Box
-                bgcolor={
-                  message.role === 'assistant'
-                    ? 'grey'
-                    : 'black'
-                }
-                color="white"
-                borderRadius={16}
-                p={3}
-              >
-                {message.content}
+    <Container>
+      {/* Hero Section */}
+      <HeroSection>
+        <Typography variant="h2" gutterBottom>
+        "Your Smart Hass Avocado Farming Partner: From Seed to Market"
+        </Typography>
+        <Typography variant="h5" gutterBottom>
+        Empower your avocado farm with AI-driven insights at every stage—planting, grafting, harvesting, and selling. Let our intelligent assistant guide you to a bountiful harvest and profitable sale
+        </Typography>
+      <Link href="/sign-up" passHref>
+        <Button variant="contained" color="primary"
+        sx={{
+            backgroundColor: 'black', // Default background color
+            '&:hover': {
+              backgroundColor: '#424242', // Dark gray on hover
+            },
+          }}>
+          Sign Up
+        </Button>
+      </Link>
+      <Link href="/sign-in" passHref>
+        <Button variant="outlined" color="primary"  sx={{
+            color: 'black', // Text color for the outlined button
+            borderColor: 'black', // Border color
+            '&:hover': {
+              backgroundColor: '#424242', // Dark gray background on hover
+              borderColor: 'black', // Keep border color black
+              color: 'white', // Change text color to white on hover
+            },
+            marginLeft: 2, // Space between buttons
+          }}>
+          Sign In
+        </Button>
+      </Link>
+      </HeroSection>
+
+      {/* Features Section */}
+      <Box py={10}>
+        <Typography variant="h4" align="center" gutterBottom>
+        
+        </Typography>
+        <Grid container spacing={4}>
+          <Grid item xs={12} md={4}>
+            <FeatureCard>
+              <CardContent>
+                <Typography variant="h5" gutterBottom>
+                Personalized Hass Avocado Farming Guidance
+                </Typography>
+                <Typography variant="body1">
+                Our AI assistant provides step-by-step guidance based on your farm's unique conditions."
+                </Typography>
+              </CardContent>
+            </FeatureCard>
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <FeatureCard>
+              <CardContent>
+                <Typography variant="h5" gutterBottom>
+                Real-time Problem Solving
+                </Typography>
+                <Typography variant="body1">
+                Facing issues with pests or plant diseases? Chat with our AI to diagnose
+                problems and get instant solutions, ensuring your avocado trees stay
+                healthy and productive
+                </Typography>
+              </CardContent>
+            </FeatureCard>
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <FeatureCard>
+              <CardContent>
+                <Typography variant="h5" gutterBottom>
+                Market Insights and Connections
+                </Typography>
+                <Typography variant="body1">
+                Stay ahead with real-time market data and connect directly with buyers. 
+                Our AI helps you navigate the best marketing strategies and find the 
+                most profitable markets for your produce
+                </Typography>
+              </CardContent>
+            </FeatureCard>
+          </Grid>
+        </Grid>
+      </Box>
+
+      {/* Testimonials Section */}
+      <TestimonialsSection>
+        <Typography variant="h4" align="center" gutterBottom>
+        </Typography>
+        <Grid container spacing={4} display="flex" justifyContent="center" alignItems="center">
+          <Grid item xs={12} md={4}>
+            <Card>
+              <CardContent>
+                <Box display="flex" alignItems="center" mb={2}>
+                <Avatar alt="User One" src="/user1.jpg" />
+                  <Box ml={2}>
+                    <Typography variant="h6">Koome Kelvin</Typography>
+                    <Typography variant="body2" color="textSecondary">
+                      Creator of find-mazao-market
+                    </Typography>
+                  </Box>
                 </Box>
-            </Box>
-          ))}
-        </Stack>
-        <Stack direction={'row'} spacing={2}>
-          <TextField
-            label="Message"
-            fullWidth
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-          />
-          <Button variant="contained" onClick={sendMessage}>
-            Send
-          </Button>
-        </Stack>
-      </Stack>
-    </Box>
-  )
+                <Typography variant="body1">
+                  "I decided to plant 20 hass avocado seedlings and do everything for myself.. 
+                  so i decided to build this AI assistant to help me out."
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
+      </TestimonialsSection>
+
+      {/* Footer */}
+      <Box py={4} textAlign="center">
+        <Typography variant="body2" color="textSecondary">
+          © {new Date().getFullYear()} find-mazao-market. All rights reserved.
+        </Typography>
+      </Box>
+    </Container>
+  );
 }
