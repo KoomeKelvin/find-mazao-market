@@ -29,7 +29,7 @@ export default function Home() {
       {/* Hero Section */}
       <HeroSection>
         <Typography variant='h2' gutterBottom>
-        'Your Smart Hass Avocado Farming Partner: From Seed to Market'
+        Your Smart Hass Avocado Farming Partner: From Seed to Market
         </Typography>
         <Typography variant='h5' gutterBottom>
         Empower your avocado farm with AI-driven insights at every stage—planting, grafting, harvesting, and selling. Let our intelligent assistant guide you to a bountiful harvest and profitable sale
@@ -74,7 +74,7 @@ export default function Home() {
                 Personalized Hass Avocado Farming Guidance
                 </Typography>
                 <Typography variant='body1'>
-                Our AI assistant provides step-by-step guidance based on your farm's unique conditions.'
+                Our AI assistant provides step-by-step guidance based on your farm's unique conditions.
                 </Typography>
               </CardContent>
             </FeatureCard>
@@ -128,8 +128,8 @@ export default function Home() {
                   </Box>
                 </Box>
                 <Typography variant='body1'>
-                  'I decided to plant 20 hass avocado seedlings and do everything for myself.. 
-                  so i decided to build this AI assistant to help me out.'
+                  I decided to plant 20 hass avocado seedlings and do everything for myself.. 
+                  so i decided to build this AI assistant to help me out.
                 </Typography>
               </CardContent>
             </Card>
