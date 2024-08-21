@@ -3,7 +3,16 @@ import {Box} from "@mui/material"
 
 export default function Signin() {
     return (
-    <SignIn/>
+        <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh', 
+        }}
+      >
+        <SignIn />
+      </Box>
     )
 
 }
