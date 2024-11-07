@@ -24,7 +24,7 @@ export default function Home() {
   const [messages, setMessages] = useState([
     {
       role: "assistant",
-      content: "I am find-mazao-market assisant, how may I help you"
+      content: "I am your Hass Avocado Farming Assistant, how may I help you"
     }
   ])
   
